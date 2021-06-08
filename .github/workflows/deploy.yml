@@ -2,11 +2,10 @@ name: deploy
 on:
   repository_dispatch:
     types: [deploy-service]
-    
-jobs:
 
-  build:
-    name: Build
+jobs:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
@@ -17,4 +16,3 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: sh deploy-app.sh {{ github.event.client_payload.environment }} {{ github.event.client_payload.branch }}
-        
